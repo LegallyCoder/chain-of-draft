@@ -6,7 +6,8 @@ from openai import OpenAI
 
 class LLMClient:
     def __init__(self, base_url: str = None, api_key: str = None):
-        self.openai_client = OpenAI(base_url=base_url, api_key=api_key or os.getenv("OPENAI_API_KEY") or "EMPTY")
+        # together support
+        self.openai_client = OpenAI(base_url="https://api.together.xyz/v1", api_key=api_key or os.getenv("OPENAI_API_KEY") or "EMPTY")
         self.anthropic_client = Anthropic()
 
     def request(
@@ -39,5 +40,5 @@ class LLMClient:
 
 if __name__ == "__main__":
     llm = LLMClient()
-    response, count = llm.request("hello", "claude-3-7-sonnet-latest")
+    response, count = llm.request("hello", "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo")
     print(response, count)
